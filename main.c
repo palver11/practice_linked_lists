@@ -1,0 +1,61 @@
+#include <stdlib.h>
+#include <stdio.h>
+
+
+typedef struct node {
+	int age;
+	struct node* next;
+} staff;
+
+// PROTORYPES
+void append(staff* head, int age);
+void push(staff** old_head, int age);
+void print_linklist(staff* list);
+
+// LOGIC
+int main() {
+  staff* person_head = malloc(sizeof(staff));
+  person_head->next = NULL;
+
+  person_head->age = 0;
+  for (int i = 1; i <= 10; i++) {
+    append(person_head, i);
+    push(&person_head, -i);
+  }
+
+  print_linklist(person_head);
+	
+	getchar();
+}
+
+// Append a new node at the end, duh...
+void append(staff* head, int age) {
+  staff* currient = head;
+  while (currient->next != NULL) {
+    currient = currient->next;
+  }
+
+  currient->next = malloc(sizeof(staff));
+  currient->next->age = age;
+  currient->next->next = NULL;
+}
+
+// Push a new node at the beginning
+void push(staff** old_head, int age) {
+  staff* new_head = malloc(sizeof(staff));
+  new_head->age = age;
+  new_head->next = *old_head;
+  *old_head = new_head;
+}
+
+// Print the value of every node of a linked list
+void print_linklist(staff* list) {
+  staff* buff = list;
+  
+  while (1) {
+    printf("%d\n", buff->age);
+
+    if (buff->next == NULL) break;
+    else buff = buff->next;
+  }
+}
