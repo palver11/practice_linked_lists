@@ -2,6 +2,10 @@
 #include <stdio.h>
 #include <conio.h> // Windows specific
 
+// NOTES:
+// getch() (for closing the window without the need to press Enter) works only on Windows.
+
+
 // --MACROS--
 // Error codes
 #define ERRCODE_NULL -1 // Now value found, got NULL
@@ -34,12 +38,11 @@ int main() {
   person_head->next = NULL;
 
   person_head->age = 0;
-  /*
+
   for (int i = 1; i <= 10; i++) {
     append(person_head, i);
     push(&person_head, -i);
   }
-  */
 
   if (pop(&person_head) == ERRCODE_NULL) {
     return 1;
@@ -47,7 +50,9 @@ int main() {
 
   print_linklist(person_head);
 	
-	getchar();
+  // To prevent terminal window closing
+  printf("= PROGRAM IS FINISHED =");
+	getch();
 }
 
 // Append a new node at the end, duh...
@@ -82,7 +87,9 @@ int pop(staff** node) {
   return 0;
 }
 
-//void 
+void pop_end() {
+  //
+}
 
 // Print the value of every node of a linked list
 void print_linklist(staff* list) {
